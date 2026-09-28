@@ -1,0 +1,8 @@
+{
+  "name": "inhabas.com-invitation",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "build:variants": "node build.js --variants"
+  }
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#c2410c" />
+    <title>{{event.name}} | IBAS</title>
+    <meta name="description" content="{{summary}}" />
+
+    <!-- 공유 미리보기 (OG). og:url, og:image는 config.json의 site.url 기준 절대 URL로 생성된다 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{event.name}}에 초대합니다" />
+    <meta property="og:description" content="{{summary}}" />
+    <meta property="og:url" content="{{site.url}}" />
+    <meta property="og:image" content="{{ogImageUrl}}" />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <!-- 1. 행사명과 인사말 -->
+      <section id="greeting">
+        <div class="cover">
+          <h1>{{event.name}}에<br />초대합니다</h1>
+          <!-- 동아리 성격(데이터 분석)을 암시하는 장식용 막대그래프. 데이터 아님 -->
+          <div class="bars" aria-hidden="true">
+            <span style="--h: 22%"></span><span style="--h: 38%"></span><span style="--h: 31%"></span>
+            <span style="--h: 52%"></span><span style="--h: 44%"></span><span style="--h: 63%"></span>
+            <span style="--h: 57%"></span><span style="--h: 71%"></span><span style="--h: 66%"></span>
+            <span style="--h: 84%"></span><span style="--h: 78%"></span><span style="--h: 100%"></span>
+          </div>
+        </div>
+        <div class="letter">
+          <p>{{event.greeting}}</p>
+          <p class="sign">IBAS 회장 <strong>{{event.president}}</strong></p>
+        </div>
+      </section>
+
+      <!-- 2. 일시 -->
+      <section id="datetime">
+        <h2>일시</h2>
+        <p class="when">
+          <time datetime="{{datetime.start}}">{{startText}}</time>
+          <span class="until">~ <time datetime="{{datetime.end}}">{{endText}}</time></span>
+        </p>
+      </section>
+
+      <!-- 3. 장소와 오시는 길 -->
+      <section id="location">
+        <h2>장소</h2>
+        <p class="place">{{location.name}}</p>
+        <address>{{location.address}}</address>
+        <ul class="maps">
+          <li><a href="{{location.naverMapUrl}}" target="_blank" rel="noopener">네이버 지도</a></li>
+          <li><a href="{{location.kakaoMapUrl}}" target="_blank" rel="noopener">카카오맵</a></li>
+        </ul>
+      </section>
+
+      <!-- 4. 프로그램 순서 -->
+      <section id="program">
+        <h2>프로그램</h2>
+        <ol class="timeline">
+{{programItems}}
+        </ol>
+      </section>
+
+      <!-- 5. 문의처 -->
+      <section id="contact">
+        <h2>문의</h2>
+        <p class="who">{{contact.name}}</p>
+        <a class="call" href="tel:{{contact.phone}}">{{contact.phone}}</a>
+      </section>
+    </main>
+  </body>
+</html>

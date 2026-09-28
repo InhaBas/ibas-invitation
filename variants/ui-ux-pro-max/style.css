@@ -1,0 +1,412 @@
+/*
+ * ui-ux-pro-max 시안
+ * 스타일: Minimalism & Swiss (가운데 정렬, 넉넉한 여백, 절제된 모션)
+ * 컬러: Academic/Scholarly navy + gold (colors.csv)
+ * 타이포: Korean Modern — Noto Sans KR (typography.csv)
+ * 섹션 id: #greeting, #datetime, #location, #program, #contact
+ */
+
+:root {
+  --color-primary: #1e3a5f;
+  --color-on-primary: #ffffff;
+  --color-accent: #b45309;
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-muted: #e9eef5;
+  --color-muted-foreground: #475569;
+  --color-border: #cbd5e1;
+  --color-ring: #1e3a5f;
+  --color-hero-dot: rgba(255, 255, 255, 0.09);
+  --color-hero-sub: #cbd5e1;
+  --color-accent-on-dark: #fbbf24;
+
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius: 16px;
+  --radius-sm: 12px;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px rgba(15, 23, 42, 0.05);
+  --max-width: 480px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #0b1a2e;
+    --color-accent: #f59e0b;
+    --color-background: #0f172a;
+    --color-foreground: #e2e8f0;
+    --color-card: #16233a;
+    --color-muted: #1e2e48;
+    --color-muted-foreground: #a3b1c6;
+    --color-border: #2c3e5c;
+    --color-ring: #93c5fd;
+    --shadow: none;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 0 calc(var(--space-16) + env(safe-area-inset-bottom));
+}
+
+h1,
+h2,
+p,
+ol,
+ul {
+  margin: 0;
+}
+
+/* ---------- 1. 인사말 ---------- */
+
+.hero {
+  position: relative;
+  padding: calc(var(--space-16) + env(safe-area-inset-top)) var(--space-6) calc(var(--space-16) + var(--space-8));
+  text-align: center;
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  /* 데이터 동아리 모티프: 점 격자 */
+  background-image: radial-gradient(var(--color-hero-dot) 1.2px, transparent 1.2px);
+  background-size: 16px 16px;
+  background-position: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-accent-on-dark);
+}
+
+.hero h1 {
+  font-size: clamp(36px, 11vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.hero-summary {
+  margin-top: var(--space-4);
+  font-size: 15px;
+  color: var(--color-hero-sub);
+}
+
+.letter {
+  position: relative;
+  margin: calc(var(--space-8) * -1) var(--space-4) 0;
+  padding: var(--space-8) var(--space-6);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.letter-body {
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.signature {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-muted);
+  color: var(--color-muted-foreground);
+  font-size: 15px;
+}
+
+.signature strong {
+  margin-left: 4px;
+  color: var(--color-foreground);
+  font-weight: 700;
+}
+
+/* ---------- 공통 카드 ---------- */
+
+.card {
+  margin: var(--space-4) var(--space-4) 0;
+  padding: var(--space-6);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+.icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- 2. 일시 ---------- */
+
+.datetime-text {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.range {
+  margin-right: 2px;
+  color: var(--color-muted-foreground);
+  font-weight: 400;
+}
+
+/* ---------- 3. 장소 ---------- */
+
+.place {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+address {
+  margin-top: 4px;
+  font-style: normal;
+  color: var(--color-muted-foreground);
+  font-size: 15px;
+}
+
+.map-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- 버튼 ---------- */
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-muted);
+  color: var(--color-foreground);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 200ms ease, transform 120ms ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  margin-top: var(--space-4);
+  border-color: transparent;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-primary {
+    background: var(--color-accent);
+    color: #0f172a;
+  }
+  .btn-primary:hover {
+    background: var(--color-accent);
+  }
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    background: var(--color-border);
+  }
+  .btn-primary:hover {
+    background: var(--color-primary);
+    filter: brightness(1.15);
+  }
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 3px;
+}
+
+/* ---------- 4. 프로그램 (build.js가 <li><time>..</time> 제목</li> 생성) ---------- */
+
+.timeline {
+  position: relative;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: baseline;
+  column-gap: var(--space-6);
+  padding: var(--space-3) 0;
+  font-size: 16px;
+}
+
+/* 세로선 + 점 */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 68px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.timeline li:first-child::before {
+  top: 50%;
+}
+
+.timeline li:last-child::before {
+  bottom: 50%;
+}
+
+.timeline li::after {
+  content: "";
+  position: absolute;
+  left: 65px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--color-card);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.timeline time {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  .timeline time {
+    color: var(--color-ring);
+  }
+}
+
+/* ---------- 5. 문의 ---------- */
+
+.contact-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ---------- 모션: 로드 시 은은한 페이드 (Subtle, 300-400ms) ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero > *,
+  .letter,
+  .card {
+    animation: rise 400ms var(--ease-out) both;
+  }
+  .hero h1 {
+    animation-delay: 60ms;
+  }
+  .hero-summary {
+    animation-delay: 120ms;
+  }
+  .letter {
+    animation-delay: 180ms;
+  }
+  #datetime {
+    animation-delay: 240ms;
+  }
+  #location,
+  #program,
+  #contact {
+    animation-delay: 300ms;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- 넓은 화면 ---------- */
+
+@media (min-width: 600px) {
+  main {
+    padding-top: var(--space-12);
+  }
+  .hero {
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding-top: var(--space-16);
+  }
+}

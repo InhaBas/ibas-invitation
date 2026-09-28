@@ -1,0 +1,151 @@
+<!doctype html>
+<!--
+  카카오톡 미리보기(OG) 이미지 원본. 1200×630.
+  ?logo=1 이면 로고를 넣는다. 캡처 방법 (프로젝트 루트에서):
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+      --window-size=1200,630 --virtual-time-budget=4000 \
+      --screenshot=public/images/og-thumbnail.png "file://$PWD/og/index.html?logo=1"
+-->
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>OG 이미지</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      body {
+        box-sizing: border-box;
+        padding: 72px 96px 64px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: radial-gradient(70% 90% at 100% 0%, rgba(42, 79, 168, 0.75) 0%, rgba(42, 79, 168, 0) 62%),
+          radial-gradient(50% 60% at 0% 100%, rgba(42, 79, 168, 0.26) 0%, rgba(42, 79, 168, 0) 70%), #0f1011;
+        color: #ffffff;
+        font-family: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", sans-serif;
+        word-break: keep-all;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      p,
+      h1 {
+        margin: 0;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .logo {
+        display: none;
+        width: 64px;
+        height: auto;
+      }
+
+      .with-logo .logo {
+        display: block;
+      }
+
+      .eyebrow {
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #aebee4;
+      }
+
+      h1 {
+        font-size: 104px;
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+      }
+
+      .sub {
+        margin-top: 20px;
+        font-size: 32px;
+        color: #c4c4ca;
+      }
+
+      .bottom {
+        padding-top: 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+
+      .day {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+      }
+
+      .year,
+      .weekday {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #a9a9a9;
+      }
+
+      .date {
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+
+      .meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+        text-align: right;
+      }
+
+      .weekday {
+        color: #aebee4;
+      }
+
+      .place {
+        font-size: 28px;
+        color: #c4c4ca;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <img class="logo" src="../public/images/ibas-logo-white.png" alt="" />
+      <p class="eyebrow">INVITATION</p>
+    </div>
+
+    <div>
+      <h1>IBAS 창립제</h1>
+      <p class="sub">선배님을 창립제에 초대합니다</p>
+    </div>
+
+    <div class="bottom">
+      <p class="day"><span class="year">2026</span><span class="date">10.31</span></p>
+      <div class="meta">
+        <p class="weekday">SATURDAY · 15:30</p>
+        <p class="place">인하대학교 본관 중강당</p>
+      </div>
+    </div>
+
+    <script>
+      if (new URLSearchParams(location.search).get("logo") === "1") document.body.classList.add("with-logo");
+    </script>
+  </body>
+</html>

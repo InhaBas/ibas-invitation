@@ -1,0 +1,430 @@
+/*
+  IBAS 창립제 초청장 / design-taste-frontend 시안
+  - 모바일(카카오톡 인앱 브라우저) 우선, 단일 컬럼
+  - 팔레트: 차가운 오프화이트 + 오프블랙 + 단일 강조색(버밀리언)
+  - 모서리: 버튼/패널 14px 하나로 통일
+  섹션 id: #greeting, #datetime, #location, #program, #contact
+*/
+
+:root {
+  --paper: #f3f3f1;
+  --surface: #fbfbfa;
+  --ink: #17181b;
+  --ink-2: #4a4c52;
+  --line: #dcdcd8;
+  --accent: #c2410c;
+  --on-accent: #fdf7f3;
+  --accent-soft: rgb(194 65 12 / 0.1);
+  --radius: 14px;
+  --gutter: 20px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121316;
+    --surface: #1a1b1f;
+    --ink: #ececea;
+    --ink-2: #a9aab0;
+    --line: #2c2d33;
+    --accent: #c94416;
+    --on-accent: #fff6f1;
+    --accent-soft: rgb(255 120 70 / 0.12);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Noto Sans KR", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 0 calc(56px + env(safe-area-inset-bottom));
+}
+
+h1,
+h2,
+p,
+ol,
+ul,
+address {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- 1. 행사명과 인사말 ---------- */
+
+.cover {
+  position: relative;
+  display: grid;
+  align-content: space-between;
+  gap: 40px;
+  min-height: min(78svh, 640px);
+  padding: calc(40px + env(safe-area-inset-top)) var(--gutter) 0;
+  background: var(--accent);
+  color: var(--on-accent);
+  overflow: hidden;
+}
+
+h1 {
+  font-size: clamp(36px, 11vw, 52px);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: end;
+  gap: 6px;
+  height: 34svh;
+  max-height: 260px;
+}
+
+.bars span {
+  display: block;
+  height: var(--h);
+  background: var(--on-accent);
+  opacity: 0.22;
+  border-radius: 3px 3px 0 0;
+  transform-origin: bottom;
+}
+
+.bars span:last-child {
+  opacity: 0.9;
+}
+
+.letter {
+  padding: 40px var(--gutter) 8px;
+}
+
+.letter p:first-child {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.sign {
+  margin-top: 28px;
+  text-align: right;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.sign strong {
+  margin-left: 6px;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ---------- 공통 섹션 ---------- */
+
+#datetime,
+#location,
+#program,
+#contact {
+  margin: 0 var(--gutter);
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+}
+
+#datetime {
+  margin-top: 40px;
+}
+
+h2 {
+  margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  h2 {
+    color: #ff8a5c;
+  }
+}
+
+/* ---------- 2. 일시 ---------- */
+
+.when {
+  display: grid;
+  gap: 4px;
+  font-size: clamp(21px, 6.3vw, 30px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.until {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+/* ---------- 3. 장소 ---------- */
+
+.place {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+address {
+  margin-top: 6px;
+  font-style: normal;
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+.maps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.maps a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.maps a:hover {
+  border-color: var(--ink-2);
+}
+
+.maps a:active {
+  transform: scale(0.98);
+}
+
+/* ---------- 4. 프로그램 ---------- */
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* build.js 출력 형태: <li><time>18:00</time> 입장 및 등록</li> */
+.timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: baseline;
+  column-gap: 20px;
+  padding: 12px 0 12px 20px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+/* 세로 축 */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 22px;
+  bottom: 22px;
+  width: 1px;
+  background: var(--line);
+}
+
+/* 각 시각의 눈금 */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(12px + 0.85em - 3.5px);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1.5px solid var(--ink-2);
+}
+
+.timeline li:first-child::before {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.timeline time {
+  color: var(--ink-2);
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 5. 문의 ---------- */
+
+.who {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  margin-top: 16px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s var(--ease);
+}
+
+.call:active {
+  transform: scale(0.98);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- 넓은 화면: 초청장 한 장처럼 ---------- */
+
+@media (min-width: 600px) {
+  main {
+    margin: 48px auto;
+    padding-bottom: 32px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 24px 60px -30px rgb(23 24 27 / 0.25);
+  }
+
+  .cover {
+    min-height: 560px;
+    padding: 56px 36px 0;
+  }
+
+  .letter {
+    padding: 48px 36px 8px;
+  }
+
+  #datetime,
+  #location,
+  #program,
+  #contact {
+    margin: 0 36px;
+  }
+
+  #datetime {
+    margin-top: 48px;
+  }
+
+  .maps a {
+    background: var(--paper);
+  }
+}
+
+/* ---------- 모션: 첫 화면 등장 + 스크롤 진입 ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 제목 → 막대그래프 순서로 첫 화면의 시선을 끌어간다 */
+  h1 {
+    animation: rise 0.9s var(--ease) both;
+  }
+
+  .bars span {
+    animation: grow 1.1s var(--ease) both;
+    animation-delay: calc(0.25s + var(--i, 0) * 45ms);
+  }
+
+  .bars span:nth-child(1) { --i: 0; }
+  .bars span:nth-child(2) { --i: 1; }
+  .bars span:nth-child(3) { --i: 2; }
+  .bars span:nth-child(4) { --i: 3; }
+  .bars span:nth-child(5) { --i: 4; }
+  .bars span:nth-child(6) { --i: 5; }
+  .bars span:nth-child(7) { --i: 6; }
+  .bars span:nth-child(8) { --i: 7; }
+  .bars span:nth-child(9) { --i: 8; }
+  .bars span:nth-child(10) { --i: 9; }
+  .bars span:nth-child(11) { --i: 10; }
+  .bars span:nth-child(12) { --i: 11; }
+
+  /* 지원 브라우저에서만 섹션이 화면에 들어올 때 살짝 떠오른다. 미지원이면 그냥 보인다 */
+  @supports (animation-timeline: view()) {
+    .letter,
+    #datetime,
+    #location,
+    #program,
+    #contact {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}

@@ -1,0 +1,318 @@
+/* Hallmark · genre: editorial · macrostructure: Letter · theme: Atelier · tone: warm-austere · anchor hue: vermilion 31
+ * enrichment: Tier-A CSS seal (도장) · nav: none · footer: none (letter sign-off closes the greeting)
+ * audience: IBAS 졸업생 · use: 일시·장소 확인 후 지도/전화 · mobile-first (KakaoTalk in-app)
+ * Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V4
+ * 섹션 id: #greeting, #datetime, #location, #program, #contact
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-desk);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+p,
+ol,
+ul,
+address {
+  margin: 0;
+}
+
+address {
+  font-style: normal;
+}
+
+/* ── 편지지 ───────────────────────────────────────────── */
+
+.sheet {
+  max-width: var(--measure);
+  min-height: 100vh;
+  min-height: 100svh;
+  margin-inline: auto;
+  padding:
+    max(var(--space-xl), env(safe-area-inset-top))
+    max(var(--space-md), env(safe-area-inset-right))
+    max(var(--space-2xl), env(safe-area-inset-bottom))
+    max(var(--space-md), env(safe-area-inset-left));
+  background: var(--color-paper);
+}
+
+@media (min-width: 40rem) {
+  .sheet {
+    min-height: 0;
+    margin-block: var(--space-2xl);
+    padding: var(--space-2xl) var(--space-xl);
+    border: var(--rule-hair) solid var(--color-rule);
+  }
+}
+
+/* ── 1. 행사명과 인사말 ───────────────────────────────── */
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-display);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+}
+
+.letter {
+  margin-top: var(--space-xl);
+  max-width: 30em;
+}
+
+/* 인사말 첫 줄(호칭)이 편지의 머리말이 된다 */
+.letter::first-line {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  line-height: 2.2;
+}
+
+.signoff {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  margin-top: var(--space-xl);
+  text-align: right;
+}
+
+.signoff-role {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  line-height: 1.4;
+}
+
+.signoff-name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  line-height: 1.4;
+}
+
+/* 도장: 서명 옆에 찍힌 동아리 인장 */
+.seal {
+  flex: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: var(--space-2xs);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-input);
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  line-height: 1;
+  letter-spacing: 0;
+  transform: rotate(-4deg);
+  opacity: 0.88;
+}
+
+/* ── 구분 (* * *) ─────────────────────────────────────── */
+
+.asterism {
+  margin-block: var(--space-2xl) var(--space-xl);
+  border: 0;
+  text-align: center;
+  color: var(--color-accent);
+  font-family: var(--font-outlier);
+  font-size: var(--text-sm);
+  letter-spacing: 0.6em;
+}
+
+.asterism::after {
+  content: "* * *";
+}
+
+/* ── 2–5. 안내 ─────────────────────────────────────────── */
+
+.detail {
+  padding-block: var(--space-lg);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+.detail:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.detail h2 {
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  line-height: 1.4;
+}
+
+.when {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-xl);
+  line-height: 1.35;
+}
+
+.when-end {
+  white-space: nowrap;
+}
+
+.place {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  line-height: 1.45;
+}
+
+.address {
+  margin-top: var(--space-3xs);
+  color: var(--color-ink-2);
+  font-size: var(--text-sm);
+}
+
+/* 지도 링크: 엄지로 누르기 좋은 두 칸 */
+.maps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2xs);
+  margin-top: var(--space-md);
+  padding: 0;
+  list-style: none;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding-inline: var(--space-sm);
+  border: var(--rule-hair) solid var(--color-ink);
+  border-radius: var(--radius-input);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+}
+
+.btn:active {
+  background: var(--color-press);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  transition: none;
+}
+
+/* 프로그램: 시간 | 순서 */
+.program {
+  padding: 0;
+  list-style: none;
+}
+
+.program li {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  align-items: baseline;
+  padding-block: var(--space-xs);
+  border-bottom: var(--rule-hair) dotted var(--color-rule);
+}
+
+.program li:last-child {
+  border-bottom: 0;
+}
+
+.program time {
+  font-family: var(--font-outlier);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 문의 */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs) var(--space-sm);
+}
+
+.contact-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-lg);
+}
+
+.tel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-accent);
+  font-family: var(--font-outlier);
+  font-weight: 500;
+  font-size: var(--text-md);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tel:active {
+  background: var(--color-press);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tel:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

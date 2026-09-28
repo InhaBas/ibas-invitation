@@ -1,0 +1,118 @@
+<!doctype html>
+<!--
+  장소 카드의 지도 이미지 원본 (OpenStreetMap). 결과는 1360×720(680×360의 2배). 프로젝트 루트에서:
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+      --window-size=962,509 --force-device-scale-factor=2 --virtual-time-budget=8000 \
+      --screenshot=/tmp/map-big.png "file://$PWD/og/map.html?tone=soft&big=1"
+    python3 -c "from PIL import Image; Image.open('/tmp/map-big.png').resize((1360, 720), Image.LANCZOS).save('public/images/map.png')"
+  좌표: 네이버 지도 "인하대학교 용현캠퍼스 본관" (https://naver.me/G386FA1S)
+-->
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>지도 이미지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <style>
+      html,
+      body,
+      #map {
+        margin: 0;
+        width: 680px;
+        height: 360px;
+        overflow: hidden;
+        background: #f2f2f3;
+      }
+
+      /* 초대장 톤에 맞춰 지도 색을 조절한다. ?tone=gray(기본) | navy | soft */
+      .leaflet-tile-pane {
+        filter: grayscale(1) contrast(0.85) brightness(1.06);
+      }
+
+      .tone-navy .leaflet-tile-pane {
+        filter: grayscale(1) sepia(1) hue-rotate(180deg) saturate(1.4) contrast(0.85) brightness(1.04);
+      }
+
+      .tone-soft .leaflet-tile-pane {
+        filter: saturate(0.35) contrast(0.92) brightness(1.04);
+      }
+
+      /* ?big=1: 17 배율로 √2배 넓게 그린 뒤 이미지를 줄여 16.5 배율 범위를 만든다 (중간 배율은 지도 조각 사이에 틈이 생김) */
+      .big,
+      .big body,
+      .big #map {
+        width: 962px;
+        height: 509px;
+      }
+
+      .big .pin {
+        zoom: 1.414;
+      }
+
+      .pin {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #1c3a8a;
+        border: 4px solid #ffffff;
+        box-sizing: border-box;
+        box-shadow: 0 0 0 10px rgba(28, 58, 138, 0.18), 0 2px 8px rgba(0, 0, 0, 0.25);
+      }
+
+      .pin-label {
+        position: absolute;
+        left: 50%;
+        bottom: 26px;
+        transform: translateX(-50%);
+        padding: 6px 10px;
+        border-radius: 6px;
+        background: #0f1f47;
+        color: #ffffff;
+        font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .leaflet-control-attribution {
+        font-family: -apple-system, sans-serif;
+        font-size: 10px !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        color: #62626a !important;
+      }
+
+      .leaflet-control-attribution a {
+        color: #62626a !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+      var params = new URLSearchParams(location.search);
+      if (params.get("big") === "1") document.documentElement.classList.add("big");
+      var tone = params.get("tone");
+      if (tone) document.body.classList.add("tone-" + tone);
+      var spot = [37.4493536, 126.654341];
+      var map = L.map("map", { zoomControl: false, attributionControl: true }).setView(spot, 17);
+      map.attributionControl.setPrefix(false);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(map);
+      L.marker(spot, {
+        icon: L.divIcon({
+          className: "",
+          html: '<div class="pin"><span class="pin-label">본관 중강당</span></div>',
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+        }),
+      }).addTo(map);
+    </script>
+  </body>
+</html>

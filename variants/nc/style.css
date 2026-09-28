@@ -1,0 +1,539 @@
+/* 섹션 id: #greeting, #datetime, #location, #program, #contact
+   모바일(카카오톡 인앱 브라우저) 우선. PC에서는 가운데 440px 열로 보인다. */
+
+:root {
+  --ink: #0f1011;
+  --ink-2: #3d3d43;
+  --muted: #62626a;
+  --faint: #a1a1a8;
+  --canvas: #f2f2f3;
+  --card: #ffffff;
+  --line: #ebebeb;
+  --border: #dcdce0;
+  --primary: #1c3a8a;
+  --primary-halo: rgba(28, 58, 138, 0.16);
+  --subtle: #aebee4;
+  --call: #0f1f47;
+  --sunday: #b8566a;
+  --cover: radial-gradient(110% 60% at 100% 0%, rgba(42, 79, 168, 0.75) 0%, rgba(42, 79, 168, 0) 62%),
+    radial-gradient(80% 40% at 0% 100%, rgba(42, 79, 168, 0.26) 0%, rgba(42, 79, 168, 0) 70%), #0f1011;
+
+  --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --gutter: 24px;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+p,
+ol,
+address {
+  margin: 0;
+}
+
+address {
+  font-style: normal;
+}
+
+a {
+  color: inherit;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--canvas);
+}
+
+/* 1. 표지 */
+.cover {
+  padding: 88px var(--gutter) 0;
+  background: var(--cover);
+  color: #ffffff;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0.08em;
+  color: var(--subtle);
+}
+
+.cover h1 {
+  margin-top: 12px;
+  max-width: 4em;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.cover-sub {
+  margin-top: 16px;
+  color: #c4c4ca;
+}
+
+.cover-date {
+  margin-top: 48px;
+  padding: 24px 0 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cover-day,
+.cover-time {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cover-time {
+  align-items: flex-end;
+  text-align: right;
+  color: #c4c4ca;
+}
+
+.cover-year,
+.cover-weekday {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.08em;
+  color: #a9a9a9;
+}
+
+.cover-weekday {
+  color: var(--subtle);
+}
+
+.cover-day time {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow .logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* 1. 인사말 */
+.letter {
+  padding: 56px var(--gutter);
+  background: var(--card);
+}
+
+.letter h2 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.36;
+  letter-spacing: -0.01em;
+}
+
+.letter-body {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--ink-2);
+}
+
+.signature {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  text-align: right;
+}
+
+.signature::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  margin-bottom: 8px;
+  background: var(--ink);
+}
+
+.signature-role {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+  color: #8a8a93;
+}
+
+.signature-name {
+  margin-right: -0.24em;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.24em;
+}
+
+/* 2~5. 카드 */
+.cards {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  padding: var(--gutter);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-halo);
+}
+
+.label span {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+
+.card-title {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.36;
+  letter-spacing: -0.01em;
+}
+
+.card-sub {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+/* 달력 (script가 채운다) */
+.calendar {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.calendar:empty {
+  display: none;
+}
+
+.cal-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  row-gap: 4px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.cal-row span {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal-head {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.cal-head span {
+  height: 18px;
+}
+
+.cal-row .sun {
+  color: var(--sunday);
+}
+
+.cal-row .on {
+  width: 32px;
+  height: 32px;
+  margin: 2px auto;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 장소 */
+.map {
+  display: block;
+  margin: 16px 0;
+  aspect-ratio: 680 / 360;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--canvas);
+}
+
+.map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.map + .card-title {
+  margin-top: 0;
+}
+
+.place-detail {
+  margin-top: 0;
+  color: var(--ink-2);
+}
+
+.address {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--muted);
+}
+
+.copy {
+  flex-shrink: 0;
+  height: 44px;
+  margin: -6px -8px -6px 0;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.copy > span {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: var(--canvas);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.copy svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.copy:focus-visible > span,
+.map-links a:focus-visible,
+.call:focus-visible,
+.map:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.map-links {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.map-links a,
+.call {
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.map-links a {
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+/* 프로그램: build.js가 <li><time>18:00</time> 제목</li>로 넣는다 */
+.program {
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.program li {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+}
+
+.program li:last-child {
+  border-bottom: 0;
+  padding-bottom: 2px;
+}
+
+.program small {
+  grid-column: 2;
+  margin-top: -10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.program time {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* 문의처 */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 10px;
+}
+
+.contact .card-sub {
+  margin-top: 0;
+}
+
+.call {
+  margin-top: 20px;
+  background: var(--call);
+  color: #ffffff;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 16px var(--gutter) 32px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 표지 첫 등장 (선택): <body class="motion">일 때만 재생 */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.motion .intro {
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.motion h1.intro {
+  animation-delay: 0.14s;
+}
+
+.motion .cover-sub.intro {
+  animation-delay: 0.3s;
+}
+
+.motion .cover-date.intro {
+  animation-delay: 0.48s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion .intro {
+    animation: none;
+  }
+}
+
+/* 좁은 화면 (320px) */
+@media (max-width: 359px) {
+  :root {
+    --gutter: 20px;
+  }
+
+  .cover h1 {
+    font-size: 40px;
+  }
+}
+
+/* PC: 어두운 배경 가운데에 440px 열 */
+@media (min-width: 600px) {
+  body {
+    background: radial-gradient(60% 40% at 80% 0%, rgba(42, 79, 168, 0.35) 0%, rgba(42, 79, 168, 0) 70%),
+      radial-gradient(50% 35% at 10% 100%, rgba(42, 79, 168, 0.18) 0%, rgba(42, 79, 168, 0) 70%), #0f1011;
+    background-attachment: fixed;
+    padding: 80px 0;
+  }
+
+  .page {
+    width: 440px;
+    min-height: 0;
+    margin: 0 auto;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 40px 120px rgba(0, 0, 0, 0.5);
+  }
+}

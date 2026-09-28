@@ -1,0 +1,67 @@
+{
+  "site": {
+    "url": "https://invite.example.com"
+  },
+  "event": {
+    "name": "IBAS 창립제",
+    "greeting": "선배님, 안녕하세요.\n올해도 IBAS가 한 해를 무사히 보내고 창립제를 준비했습니다.\n선배님들께서 닦아 주신 길 위에서, 후배들은 오늘도 데이터로 생각하고 함께 성장하고 있습니다.\n오랜만에 한자리에 모여 그간의 이야기를 나누고 싶습니다. 바쁘시겠지만 부디 오셔서 자리를 빛내 주세요.",
+    "president": "이윤주"
+  },
+  "datetime": {
+    "start": "2026-10-31T15:30",
+    "end": "2026-10-31T18:30"
+  },
+  "location": {
+    "name": "인하대학교 본관 중강당",
+    "detail": "지하 1층",
+    "address": "인천광역시 미추홀구 인하로 100",
+    "naverMapUrl": "https://map.naver.com/p/entry/place/16592205",
+    "kakaoMapUrl": "https://map.kakao.com/link/map/인하대학교%20본관%20중강당,37.4493536,126.654341"
+  },
+  "program": [
+    {
+      "time": "15:00",
+      "title": "접수",
+      "detail": "~15:30 · 명찰·굿즈 배부"
+    },
+    {
+      "time": "15:40",
+      "title": "개회 · 회장 인사",
+      "detail": "인사 영상 시청 (최서욱-최태성 교수님 아드님, 박승욱 교수님)"
+    },
+    {
+      "time": "15:50",
+      "title": "지도교수님 축사",
+      "detail": "허원창 교수님"
+    },
+    {
+      "time": "16:00",
+      "title": "IBAS 연혁 및 올해 활동 보고"
+    },
+    {
+      "time": "16:20",
+      "title": "졸업생 커리어 세션",
+      "detail": "패널 토크 + Q&A"
+    },
+    {
+      "time": "17:10",
+      "title": "휴식 및 부스 콘텐츠"
+    },
+    {
+      "time": "18:00",
+      "title": "경품 추첨 · 단체 사진"
+    },
+    {
+      "time": "18:30",
+      "title": "폐회사 · 뒤풀이 이동",
+      "detail": "김형기 교수님, 강연자 세 분"
+    }
+  ],
+  "contact": {
+    "name": "김운영",
+    "phone": "010-0000-0000"
+  },
+  "og": {
+    "image": "images/og-thumbnail.png"
+  }
+}

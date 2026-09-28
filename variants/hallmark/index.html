@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>{{event.name}} | IBAS</title>
+    <meta name="description" content="{{summary}}" />
+
+    <!-- 공유 미리보기 (OG). og:url, og:image는 config.json의 site.url 기준 절대 URL로 생성된다 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{event.name}}에 초대합니다" />
+    <meta property="og:description" content="{{summary}}" />
+    <meta property="og:url" content="{{site.url}}" />
+    <meta property="og:image" content="{{ogImageUrl}}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@500&family=Nanum+Myeongjo:wght@800&display=swap"
+    />
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="sheet">
+      <!-- 1. 행사명과 인사말 -->
+      <section id="greeting">
+        <h1 class="title">{{event.name}}</h1>
+        <p class="letter">{{event.greeting}}</p>
+        <p class="signoff">
+          <span>
+            <span class="signoff-role">IBAS 회장</span>
+            <span class="signoff-name">{{event.president}}</span>
+          </span>
+          <span class="seal" aria-hidden="true"><span>I</span><span>B</span><span>A</span><span>S</span></span>
+        </p>
+      </section>
+
+      <hr class="asterism" />
+
+      <div class="details">
+        <!-- 2. 일시 -->
+        <section id="datetime" class="detail">
+          <h2>일시</h2>
+          <p class="when">
+            <time datetime="{{datetime.start}}">{{startText}}</time>
+            <span class="when-end">~ <time datetime="{{datetime.end}}">{{endText}}</time></span>
+          </p>
+        </section>
+
+        <!-- 3. 장소와 오시는 길 -->
+        <section id="location" class="detail">
+          <h2>장소</h2>
+          <p class="place">{{location.name}}</p>
+          <address class="address">{{location.address}}</address>
+          <ul class="maps">
+            <li><a class="btn" href="{{location.naverMapUrl}}" target="_blank" rel="noopener">네이버 지도</a></li>
+            <li><a class="btn" href="{{location.kakaoMapUrl}}" target="_blank" rel="noopener">카카오맵</a></li>
+          </ul>
+        </section>
+
+        <!-- 4. 프로그램 순서 -->
+        <section id="program" class="detail">
+          <h2>프로그램</h2>
+          <ol class="program">
+{{programItems}}
+          </ol>
+        </section>
+
+        <!-- 5. 문의처 -->
+        <section id="contact" class="detail">
+          <h2>문의</h2>
+          <p class="contact">
+            <span class="contact-name">{{contact.name}}</span>
+            <a class="tel" href="tel:{{contact.phone}}">{{contact.phone}}</a>
+          </p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

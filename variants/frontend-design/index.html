@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#F2F4F1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101B30" media="(prefers-color-scheme: dark)" />
+    <title>{{event.name}} | IBAS</title>
+    <meta name="description" content="{{summary}}" />
+
+    <!-- 공유 미리보기 (OG). og:url, og:image는 config.json의 site.url 기준 절대 URL로 생성된다 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{event.name}}에 초대합니다" />
+    <meta property="og:description" content="{{summary}}" />
+    <meta property="og:url" content="{{site.url}}" />
+    <meta property="og:image" content="{{ogImageUrl}}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <!-- 1. 행사명과 인사말 -->
+      <section id="greeting">
+        <h1>{{event.name}}</h1>
+        <div class="letter">
+          <p>{{event.greeting}}</p>
+          <p class="signature">IBAS 회장 <strong>{{event.president}}</strong></p>
+        </div>
+      </section>
+
+      <!-- 2. 일시 -->
+      <section id="datetime">
+        <h2>일시</h2>
+        <p class="when">
+          <time datetime="{{datetime.start}}">{{startText}}</time>
+          <span class="range-end"><span class="until">~</span> <time datetime="{{datetime.end}}">{{endText}}</time></span>
+        </p>
+      </section>
+
+      <!-- 3. 장소와 오시는 길 -->
+      <section id="location">
+        <h2>장소</h2>
+        <p class="place">{{location.name}}</p>
+        <address>{{location.address}}</address>
+        <ul class="maps">
+          <li><a href="{{location.naverMapUrl}}" target="_blank" rel="noopener">네이버 지도</a></li>
+          <li><a href="{{location.kakaoMapUrl}}" target="_blank" rel="noopener">카카오맵</a></li>
+        </ul>
+      </section>
+
+      <!-- 4. 프로그램 순서 -->
+      <section id="program">
+        <h2>프로그램</h2>
+        <ol class="axis" data-end="{{endText}}">
+{{programItems}}
+        </ol>
+      </section>
+
+      <!-- 5. 문의처 -->
+      <section id="contact">
+        <h2>문의</h2>
+        <p class="person">
+          <span>{{contact.name}}</span>
+          <a href="tel:{{contact.phone}}">{{contact.phone}}</a>
+        </p>
+      </section>
+    </main>
+
+    <script>
+      // 프로그램 항목 사이 간격을 실제 시간 차이에 비례하게 벌린다.
+      // JS가 없으면 고른 간격의 목록으로 그대로 보인다.
+      (function () {
+        var axis = document.querySelector(".axis");
+        if (!axis) return;
+        var toMin = function (t) {
+          var m = /(\d{1,2}):(\d{2})/.exec(t || "");
+          return m ? +m[1] * 60 + +m[2] : null;
+        };
+        var items = Array.prototype.slice.call(axis.children);
+        var end = axis.getAttribute("data-end");
+        if (end && toMin(end) !== null) {
+          var li = document.createElement("li");
+          li.className = "end";
+          li.setAttribute("aria-hidden", "true");
+          li.innerHTML = "<time></time>";
+          li.firstChild.textContent = end;
+          axis.appendChild(li);
+          items.push(li);
+        }
+        for (var i = 0; i < items.length - 1; i++) {
+          var a = toMin(items[i].querySelector("time") && items[i].querySelector("time").textContent);
+          var b = toMin(items[i + 1].querySelector("time") && items[i + 1].querySelector("time").textContent);
+          if (a === null || b === null || b <= a) continue;
+          items[i].style.setProperty("--span", b - a);
+        }
+        axis.classList.add("is-scaled");
+
+        if (!("IntersectionObserver" in window)) return axis.classList.add("is-drawn");
+        var io = new IntersectionObserver(
+          function (entries) {
+            if (entries[0].isIntersecting) {
+              axis.classList.add("is-drawn");
+              io.disconnect();
+            }
+          },
+          { threshold: 0.25 }
+        );
+        axis.classList.add("will-draw");
+        io.observe(axis);
+      })();
+    </script>
+  </body>
+</html>
